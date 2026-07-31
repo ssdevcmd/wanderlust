@@ -1,25 +1,29 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Envelope } from "@gravity-ui/icons";
 import { Button, FieldError, Input, Label, Modal, Surface, TextField, Select, ListBox, TextArea } from "@heroui/react";
 
-export function EditModal({destination}) {
+export function EditModal({ destination }) {
     const { _id, imageUrl, price, destinationName, duration, country, description, category, departureDate } = destination;
 
-        const onSubmit = async (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget)
         const destination = Object.fromEntries(formData.entries());
 
         console.log(destination);
 
-        const res = await fetch(`http://localhost:5000/destination/${_id}`, {
+        const { data: tokenData } = await authClient.token()
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${_id}`, {
             method: 'PATCH',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${tokenData?.token}`
             },
             body: JSON.stringify(destination)
-        } )
+        })
 
         const data = await res.json();
         console.log(data);
@@ -27,8 +31,8 @@ export function EditModal({destination}) {
     return (
         <Modal>
             <div className=''>
-                            <Button variant='outline' className={'rounded-none mt-5 mb-3'}>Edit</Button>
-                        </div>
+                <Button variant='outline' className={'rounded-none mt-5 mb-3'}>Edit</Button>
+            </div>
             <Modal.Backdrop>
                 <Modal.Container placement="auto">
                     <Modal.Dialog className="sm:max-w-xl">
@@ -46,20 +50,20 @@ export function EditModal({destination}) {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                         {/* Destination Name */}
                                         <div className="md:col-span-2">
-                                            <TextField 
-                                            defaultValue={destinationName}
-                                            name="destinationName" isRequired>
+                                            <TextField
+                                                defaultValue={destinationName}
+                                                name="destinationName" isRequired>
                                                 <Label>Destination Name</Label>
                                                 <Input
-                                                 placeholder="Bali Paradise" className="rounded-2xl" />
+                                                    placeholder="Bali Paradise" className="rounded-2xl" />
                                                 <FieldError />
                                             </TextField>
                                         </div>
 
                                         {/* Country */}
-                                        <TextField 
-                                        defaultValue={country}
-                                        name="country" isRequired>
+                                        <TextField
+                                            defaultValue={country}
+                                            name="country" isRequired>
                                             <Label>Country</Label>
                                             <Input placeholder="Indonesia" className="rounded-2xl" />
                                             <FieldError />
@@ -68,7 +72,7 @@ export function EditModal({destination}) {
                                         {/* Category - Updated Select Component */}
                                         <div>
                                             <Select
-                                            defaultValue={category}
+                                                defaultValue={category}
                                                 name="category"
                                                 isRequired
                                                 className="w-full"
@@ -111,9 +115,9 @@ export function EditModal({destination}) {
                                         </div>
 
                                         {/* Price */}
-                                        <TextField 
-                                        defaultValue={price}
-                                        name="price" type="number" isRequired>
+                                        <TextField
+                                            defaultValue={price}
+                                            name="price" type="number" isRequired>
                                             <Label>Price (USD)</Label>
                                             <Input
                                                 type="number"
@@ -125,8 +129,8 @@ export function EditModal({destination}) {
 
                                         {/* Duration */}
                                         <TextField
-                                        defaultValue={duration}
-                                        name="duration" isRequired>
+                                            defaultValue={duration}
+                                            name="duration" isRequired>
                                             <Label>Duration</Label>
                                             <Input
                                                 placeholder="7 Days / 6 Nights"
@@ -137,9 +141,9 @@ export function EditModal({destination}) {
 
                                         {/* Departure Date */}
                                         <div className="md:col-span-2">
-                                            <TextField 
-                                            defaultValue={departureDate}
-                                            name="departureDate" type="date" isRequired>
+                                            <TextField
+                                                defaultValue={departureDate}
+                                                name="departureDate" type="date" isRequired>
                                                 <Label>Departure Date</Label>
                                                 <Input type="date" className="rounded-2xl" />
                                                 <FieldError />
@@ -148,9 +152,9 @@ export function EditModal({destination}) {
 
                                         {/* Image URL - Removed preview */}
                                         <div className="md:col-span-2">
-                                            <TextField 
-                                            defaultValue={imageUrl}
-                                            name="imageUrl" isRequired>
+                                            <TextField
+                                                defaultValue={imageUrl}
+                                                name="imageUrl" isRequired>
                                                 <Label>Image URL</Label>
                                                 <Input
                                                     type="url"
@@ -163,9 +167,9 @@ export function EditModal({destination}) {
 
                                         {/* Description */}
                                         <div className="md:col-span-2">
-                                            <TextField 
-                                            defaultValue={description}
-                                            name="description" isRequired>
+                                            <TextField
+                                                defaultValue={description}
+                                                name="description" isRequired>
                                                 <Label>Description</Label>
                                                 <TextArea
                                                     placeholder="Describe the travel experience..."
@@ -178,13 +182,13 @@ export function EditModal({destination}) {
 
                                     {/* Buttons */}
 
-                               <Modal.Footer>
-                            <Button type="submit" slot="close">Save</Button>
-                        </Modal.Footer>
+                                    <Modal.Footer>
+                                        <Button type="submit" slot="close">Save</Button>
+                                    </Modal.Footer>
                                 </form>
                             </Surface>
                         </Modal.Body>
-                        
+
                     </Modal.Dialog>
                 </Modal.Container>
             </Modal.Backdrop>

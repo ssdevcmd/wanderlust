@@ -1,6 +1,8 @@
+import BookingCard from '@/components/BookingCard';
 import { DeleteAlert } from '@/components/DeleteAlert';
 import { EditModal } from '@/components/EditModal';
-import { Button } from '@heroui/react';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import React from 'react';
 import { FaRegCalendar } from 'react-icons/fa';
@@ -8,11 +10,22 @@ import { LuMapPin } from 'react-icons/lu';
 
 const DestinationDetailsPage = async ({ params }) => {
     const { id } = await params;
+    
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
+    console.log(token);
 
-    const res = await fetch(`http://localhost:5000/destination/${id}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${id}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    });
     const destination = await res.json()
 
-    console.log(destination);
+    // console.log("ID:", id);
+    // console.log("Status:", res.status);
+    // console.log("Destination:", destination);
 
     const { _id, imageUrl, price, destinationName, duration, country, description } = destination;
     return (
@@ -20,9 +33,9 @@ const DestinationDetailsPage = async ({ params }) => {
 
             <div className='flex items-center gap-3 justify-end mt-5 mb-3'>
                 <EditModal destination={destination}></EditModal>
-            <DeleteAlert destination={destination}></DeleteAlert>
+                <DeleteAlert destination={destination}></DeleteAlert>
             </div>
-            <Image 
+            <Image
                 className='w-full h-100 object-cover'
                 alt={destinationName}
                 src={imageUrl}
@@ -30,31 +43,32 @@ const DestinationDetailsPage = async ({ params }) => {
                 width={800}>
 
             </Image>
-            <div className='p-2'>
-                <div>
-                    <div className="flex items-center gap-2">
-                        <LuMapPin />
-                        <span>{country}</span>
-                    </div>
 
-                    <div className="flex justify-between items-center mt-2">
-                        <h2 className="text-xl font-bold">
-                            {destinationName}
-                        </h2>
+            <div className='flex justify-between gap-10'>
+                <div className='p-2'>
+                    <div>
+                        <div className="flex items-center gap-2">
+                            <LuMapPin />
+                            <span>{country}</span>
+                        </div>
 
-                        <h3 className="text-2xl font-bold">
-                            ${price}
-                        </h3>
-                    </div>
+                        <div className="flex justify-between items-center mt-2">
+                            <h2 className="text-xl font-bold">
+                                {destinationName}
+                            </h2>
+                        </div>
 
-                    <div className="flex items-center gap-1 mt-2">
-                        <FaRegCalendar />
-                        <span>{duration}</span>
+                        <div className="flex items-center gap-1 mt-2">
+                            <FaRegCalendar />
+                            <span>{duration}</span>
+                        </div>
                     </div>
+                    <h1 className='mt-10 text-2xl font-bold'>Overview</h1>
+                    <p className='max-w-6xl'>{description}</p>
+
                 </div>
-                <h1 className='mt-10 text-2xl font-bold'>Overview</h1>
-                <p>{description}</p>
 
+                <BookingCard destination={destination}></BookingCard>
             </div>
         </div>
     );
