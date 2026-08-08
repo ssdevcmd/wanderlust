@@ -14,7 +14,7 @@ Wanderlust is a responsive tourism website that helps users discover popular tra
 
 ## 🚀 Live Demo
 
-- 🌐 Live Site: https://your-wanderlust-live.vercel.app
+- 🌐 Live Site: https://wanderlust-red.vercel.app
 - 💻 Repository: https://github.com/ssdevcmd/wanderlust
 
 ---
@@ -71,7 +71,7 @@ npm run dev
 
 ## 🔗 Links
 
-- 🌐 Live Site: wanderlust-red.vercel.app
+- 🌐 Live Site: https://wanderlust-red.vercel.app
 - 💻 Repository: https://github.com/ssdevcmd/wanderlust
 
 ---
