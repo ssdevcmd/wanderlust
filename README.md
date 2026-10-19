@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌍 Wanderlust
 
-## Getting Started
+## 📖 Overview
 
-First, run the development server:
+Wanderlust is a responsive tourism website that helps users discover popular travel destinations, explore tour packages, and plan memorable trips with a modern user experience.
+
+---
+
+## 📸 Screenshot
+
+![Wanderlust Screenshot](./public/screenshot.png)
+
+---
+
+## 🚀 Live Demo
+
+- 🌐 Live Site: https://wanderlust-red.vercel.app
+- 💻 Repository: https://github.com/ssdevcmd/wanderlust
+
+---
+
+## 🛠️ Technology Stack
+
+- Next.js
+- React
+- Tailwind CSS
+- HeroUI
+- Node.js
+- Express.js
+- MongoDB
+
+---
+
+## ✨ Features
+
+- 🌍 Explore Tourist Destinations
+- 📍 Destination Details Page
+- 🔍 Search & Filter Tours
+- 📱 Fully Responsive Design
+- ⚡ Fast Performance
+- 🎨 Modern User Interface
+
+---
+
+## 📦 Dependencies
+
+- next
+- react
+- tailwindcss
+- @heroui/react
+- axios
+- express
+- mongodb
+- dotenv
+
+---
+
+## ⚙️ Run Locally
 
 ```bash
+git clone https://github.com/ssdevcmd/wanderlust.git
+
+cd wanderlust
+
+npm install
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🔗 Links
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🌐 Live Site: https://wanderlust-red.vercel.app
+- 💻 Repository: https://github.com/ssdevcmd/wanderlust
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 👨‍💻 Author
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Solayman Sani**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GitHub: https://github.com/ssdevcmd
